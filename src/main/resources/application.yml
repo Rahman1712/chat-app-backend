@@ -1,0 +1,65 @@
+#server:
+#  port: 8080
+#  servlet:
+#    context-path: /chats
+    
+spring:
+  application:
+    name: CHAT-APP
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/${MYSQL_DB}?createDatabaseIfNotExist=true
+    username: ${MYSQL_USER}
+    password: ${MYSQL_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+            required: true    
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  codec:
+    max-in-memory-size: 20MB
+
+# 10 mins 1000*60*10  # 1 minute 60000  # 30 sec 30000
+jwt:
+  secret:
+    key:
+      token: ${JWT_TOKEN}
+      expiration: 1296000000  # 15 days
+  filter:
+    disable:
+      request:
+        uris: /api/v1/auth/**,
+              /api/v1/public/**,
+              /ws/**,
+              /resources/**,
+              /static/**,
+              /css/**,
+              /js/**,
+              /images/**,
+              /vendor/**,
+              /fonts/**,
+              /videos/**
+
+cors:
+  set:
+    allowed:
+      origins: ${CORS_1},
+               ${CORS_2},
+               ${CORS_3}
+      
