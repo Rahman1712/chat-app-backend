@@ -62,4 +62,6 @@ cors:
       origins: ${CORS_1},
                ${CORS_2},
                ${CORS_3}
+      ws: 
+        origins: ${CORS_WS}
       
